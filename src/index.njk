@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>defenestration</title>
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="defenestration.org.uk" />
+		<meta property="og:url" content="http://defenestration.org.uk" />
+		<meta property="og:title" content="defenestration.org.uk" />
+		<meta property="og:description" content="noun, to throw someone or something out of a window." />
+
+		<style>
+
+            :root {
+                --margin: 3em;
+                --primary-colour: #333333;
+                --secondary-colour-: #999999;
+            }
+
+            html, body {
+                font-family: 'Times New Roman', Times, Baskerville, Georgia, serif;
+                font-size: 12px;
+                color: #666666;
+            }
+
+            header, footer {
+                position: fixed;
+                left: var(--margin);
+                color: var(--primary-colour);
+                top: var(--margin);
+            }
+
+            footer {
+                top: auto;
+                bottom: var(--margin);
+            }
+
+            header h1 {
+                font-size: clamp( 3em, calc(1rem + 5vw), 10em );
+                font-weight: normal;
+                margin: 0px;
+            }
+
+            header p {
+                font-size: clamp( 1.5em, calc(1rem + 2vw), 5em );
+                color: #999999;
+                margin: 0px;
+                min-width: 20em;
+                max-width: 40vw;
+            }
+
+            main {
+                position: absolute;
+                top: var(--margin);
+                right: var(--margin);
+                bottom: 0px;
+                width: 1024px;
+                z-index: -1;
+            }
+
+            main img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            footer {
+                font-family: Verdana, Geneva, sans-serif;
+            }
+
+            footer a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            @media screen and (max-width: 1024px) {
+                main { width: 800px; }            
+            }
+
+            @media screen and (max-width: 800px) {
+                main { margin-top: 10em; width: 400px; }
+            }
+
+		</style>
+
+    </head>
+    <body>
+
+		<header>
+			<h1>defenestration</h1>
+			<p>noun, The act of throwing something, or someone, out of a window.</p>
+		</header>
+
+		<main>
+			<img src="./images/top.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+			<img src="./images/floor1.avif" alt="" />
+		</main>
+
+		<footer>
+			<p>&copy;{{ currentYear }} <a href="http://www.smith-net.org.uk" title="smith-net.org.uk">smith-net.org.uk</a> - you have fallen a total of <span>0</span> meters.</p>
+		</footer>
+
+        <script>
+
+            //grab some reference to various dom elements
+            const tower    = document.querySelector('main');
+            const distance = document.querySelector('footer span');
+
+            //keep track of the lowest point the user has reached
+            let lowestPoint = 0;
+
+            //run event each time the user scrolls
+            window.addEventListener('scroll', function() {
+
+                //update the lowest point the user has reached
+                distance.innerHTML = formatNumber((lowestPoint = Math.max(lowestPoint, Math.floor((window.pageYOffset || document.documentElement.scrollTop) / 200))));
+
+                //if we are near the bottom of the page, add some new floors to the tower
+                if ((document.documentElement.scrollHeight - (window.pageYOffset || document.documentElement.scrollTop) - window.innerHeight) < 1000) {
+                    for (i = 0; i <= 5; i++) {
+                        tower.appendChild(createElement('img', { 'src' : `./images/floor${((randomNumber(0, 5) == 0) ? randomNumber(2, {{ floorCount }}) : '1')}.avif`, 'alt' : '' }));
+                    }
+                }
+
+            });
+
+            //generate a random number between min and max
+            function randomNumber(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            //format a number to a string with commas
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            //create a dom element, allows us to set attributes and/or a text node to it
+            function createElement(elementType, attributes, textNode) {
+
+                //
+                const element = document.createElement(elementType);
+
+                //
+                for (const [attributeName, attributeValue] of Object.entries((attributes || {}))) {
+                    if (attributeName in element) {
+                        element[attributeName] = attributeValue
+                    } else {
+                        element.setAttribute(attributeName, attributeValue);
+                    }
+                }
+
+                //
+                if (typeof textNode !== 'undefined') {
+                    element.append(document.createTextNode(textNode));
+                }
+
+                //
+                return element;
+
+            }
+
+		</script>
+
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2570a4b897ae43f8bacc108f248845e1"}'></script>
+        <!-- End Cloudflare Web Analytics -->
+
+	</body>
+</html>
+

@@ -1,0 +1,22 @@
+{
+  "name": "defenestration",
+  "version": "1.0.0",
+  "description": "The act of throwing something, or someone, out of a window.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eldarni/defenestration.git"
+  },
+  "author": "Eldarni",
+  "bugs": {
+    "url": "https://github.com/Eldarni/defenestration/issues"
+  },
+  "homepage": "https://github.com/Eldarni/defenestration#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^1.0.1"
+  }
+}
