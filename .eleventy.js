@@ -12,7 +12,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addGlobalData('currentYear', String(new Date().getFullYear()));
 
     //
-    eleventyConfig.addGlobalData('floorCount', glob.sync('./public/images/floor*.avif').length);
+    eleventyConfig.addGlobalData('floorCount', glob.sync('./public/images/floor*.webp').length);
 
     //define the default input and output folders
     return {
